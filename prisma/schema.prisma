@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model cargo {
+  id    Int    @id @default(autoincrement())
+  cargo String @db.VarChar(255)
+}
+
+model empleados {
+  id              Int     @id @default(autoincrement())
+  cedula          Int     @unique
+  nombre_completo String?
+  cargo           String?
+  municipio       String?
+  parroquia       String?
+  plantel         String?
+  dependencia     String?
+  voto            Int?    @default(0)
+}
+
+model municipio {
+  id        BigInt @id @default(autoincrement())
+  municipio String @db.VarChar(255)
+}
+
+model parroquia {
+  id           BigInt @id @default(autoincrement())
+  municipio_id BigInt
+  parroquia    String @db.VarChar(255)
+}
